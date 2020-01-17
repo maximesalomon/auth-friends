@@ -35,24 +35,25 @@ const Login = () => {
       <h1>Login</h1>
       {error && <Error>{error}</Error>}
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ username: "", password: "" }}
         onSubmit={(data, { setSubmitting }) => {
           setSubmitting(true);
           axios
             .post("http://localhost:5000/api/login", data)
             .then(res => {
-              console.log(res);
+                console.log(res.data.payload)
+                localStorage.setItem("token", res.data.payload)
             })
             .catch(err => {
               setError(err.response.data.error)
             });
-          setSubmitting(true);
+          setSubmitting(false);
         }}
       >
         {({ values, isSubmitting }) => (
           <Form>
             <LoginForm>
-              <Field name="email" type="email" placeholder="email"></Field>
+              <Field name="username" type="text" placeholder="username"></Field>
               <Field
                 name="password"
                 type="password"
