@@ -14,9 +14,9 @@ const Login = () => {
         onSubmit={(data, { setSubmitting }) => {
           setSubmitting(true);
           api()
-            .post("http://localhost:5000/api/login", data)
+            .post("/login", data)
             .then(res => {
-                console.log(res.data.payload)
+                console.log(res)
                 localStorage.setItem("token", res.data.payload)
             })
             .catch(err => {
