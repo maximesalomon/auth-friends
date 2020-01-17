@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Link } from "react-router-dom";
 import styled from 'styled-components';
+import ProtectedRoute from './ProtectedRoute';
 import Home from './Home';
 import Friends from './Friends';
 import Login from './Login';
@@ -26,7 +27,7 @@ const App = () => {
         <Link to="/login">Login</Link>
       </Nav>
       <Route path="/" exact component={Home}></Route>
-      <Route path="/friends" exact component={Friends}></Route>
+      <ProtectedRoute path="/friends" exact component={Friends}></ProtectedRoute>
       <Route path="/login" exact component={Login}></Route>
     </Wrapper>
   );
