@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
+import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import api from "./utils/api";
 
-const Login = () => {
+const Login = props => {
   const [error, setError] = useState();
   return (
     <div className="App">
@@ -16,11 +17,12 @@ const Login = () => {
           api()
             .post("/login", data)
             .then(res => {
-                console.log(res)
-                localStorage.setItem("token", res.data.payload)
+              console.log(res);
+              localStorage.setItem("token", res.data.payload);
+              props.history.push("/friends");
             })
             .catch(err => {
-              setError(err.response.data.error)
+              setError(err.response.data.error);
             });
           setSubmitting(false);
         }}
@@ -68,4 +70,4 @@ const Error = styled.p`
   color: red;
 `;
 
-export default Login;
+export default withRouter(Login);

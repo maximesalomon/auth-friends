@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default () => {
-    return axios.create({
-        baseURL: "http://localhost:5000/api",
-        headers: {
-            Authorization: localStorage.getItem("token")
-        }
-    })
-}
+  return axios.create({
+    baseURL: "http://localhost:5000/api",
+    headers: {
+      Authorization: localStorage.getItem("token")
+    }
+  });
+};
