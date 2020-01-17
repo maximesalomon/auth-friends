@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { UserContext } from './UserContext';
 import { Route, Link } from "react-router-dom";
 import { getToken } from './utils/api' 
 import styled from "styled-components";
@@ -24,14 +25,11 @@ const App = () => {
         }
         { !loggedIn && <Link to="/login">Login</Link> }
       </Nav>
-      <Route path="/" exact component={Home}></Route>
-      <ProtectedRoute
-        path="/friends"
-        exact
-        component={Friends}
-      ></ProtectedRoute>
-      
-      <Route path="/login" exact component={Login}></Route>
+      <UserContext.Provider value={{loggedIn, setLoggedIn}}>
+        <Route path="/" exact component={Home}></Route>
+        <ProtectedRoute path="/friends"exact component={Friends}></ProtectedRoute>
+        <Route path="/login" exact component={Login}></Route>
+      </UserContext.Provider>
     </Wrapper>
   );
 };

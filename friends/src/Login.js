@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Formik, Form, Field } from "formik";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import api from "./utils/api";
+import { UserContext } from './UserContext';
 
 const Login = props => {
   const [error, setError] = useState();
+  const { loggedIn, setLoggedIn} = useContext(UserContext);
   return (
     <div className="App">
       <h1>Login</h1>
@@ -19,6 +21,7 @@ const Login = props => {
             .then(res => {
               console.log(res);
               localStorage.setItem("token", res.data.payload);
+              setLoggedIn(true);
               props.history.push("/friends");
             })
             .catch(err => {
